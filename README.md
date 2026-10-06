@@ -71,7 +71,33 @@
 
 ## 🛠️ Quickstart
 
-*(Commands will be added as layers complete)*
+### Layer 1: Run Local Micro-Platform (Docker Compose)
+
+```bash
+# 1. Start all 5 microservices (MongoDB, Redis, Kafka KRaft, Order API, Kitchen Worker)
+docker compose up --build -d
+
+# 2. Check cluster health status
+docker compose ps
+
+# 3. View the menu (Served via Cache-Aside from Redis)
+curl http://localhost:8000/menu
+
+# 4. Place an order (Kafka async queue ingestion)
+curl -X POST http://localhost:8000/orders \
+  -H "Content-Type: application/json" \
+  -d '{
+    "outlet_id": "outlet-dxb-01",
+    "customer_name": "Harmanpreet",
+    "items": [{"item_id": "burger-01", "name": "Classic Zinger Burger", "quantity": 2}]
+  }'
+
+# 5. Check real-time order status (transitions: received -> preparing -> ready)
+curl http://localhost:8000/orders/<order_id>
+
+# 6. Run unit tests
+pytest tests/
+```
 
 ---
 

@@ -89,3 +89,9 @@ To complete the entire platform with full interview readiness, we are progressin
   - *Why:* `EXPOSE` is purely documentation; `ports:` actively binds container ports to the host interface.
 - **Concept 19: Health Check Parameters (`start_period`, `interval`, `retries`)**
   - *Why:* Gives heavy services like Kafka bootstrap grace time before applying failure thresholds.
+- **Concept 20: Docker Architecture (CLI vs Daemon & Sockets)**
+  - *Why:* Docker CLI is a REST client that communicates with the background daemon (`dockerd`) over Unix sockets/named pipes.
+- **Concept 21: Unit Tests vs Integration Tests (Shift-Left Testing)**
+  - *Why:* Unit tests run in under 1 second without external databases, failing fast in CI before expensive Docker image builds.
+- **Concept 22: Mocking External Dependencies (`unittest.mock`)**
+  - *Why:* Isolates unit tests from live databases and queues so tests run deterministically anywhere.
